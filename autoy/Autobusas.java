@@ -12,6 +12,30 @@ public class Autobusas extends Auto {
 	public Autobusas( Stotele[] marsrutas) {
 		
 		super();
+		this.marsrutas = marsrutas;			
+	}
+	
+	public Autobusas ( String vardas, double greitis, Stotele[] marsrutas  ) {
+		
+		super( vardas, greitis );
 		this.marsrutas = marsrutas;
 	}
+	
+	
+	
+	public String parodyti ( ) {
+		
+		String stoteles = "";
+		
+		for (int i = 0; i < marsrutas.length; i++ ) {
+			
+			stoteles += " " + marsrutas[ i ].parodyti();
+		} 
+		return  super.parodyti() + "\n\t---- Marsrutas:" + stoteles;
+	}
+	
+	public String kasAs() {
+		
+		return getClass().getSimpleName();
+	}	
 }
