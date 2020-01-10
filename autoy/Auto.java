@@ -32,7 +32,7 @@ public class Auto {
 		this.laiko_intervalas += laiko_intervalas;			
 	}
 
-	public double nuvaziotas_atstumas () {
+	public double nuvaziotasAtstumas () {
 		
 		return (this.greitis * laiko_intervalas);
 	}

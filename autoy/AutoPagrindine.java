@@ -106,19 +106,21 @@ public class AutoPagrindine {
 			System.out.println ( "Skaitymo klaida" );
 			System.out.println ( e.getMessage() );
 		}
+
 		
-		String linija = "-----------";
-		String antrasete = "";
+		KonsolesLentele konsoles_lenta = new KonsolesLentele ( k + 1 );
+		
+		konsoles_lenta.pridetiStulpeli( "Laikas", "%7.0f", 7);
 		
 		for (int i = 0; i < k; i++ ) {
 		
-			System.out.print ( String.format( " %10s |", automob[ i ].pav ) );
+			konsoles_lenta.pridetiStulpeli( automob[ i ].pav, "%10.0f", 10 );
 		}
-		System.out.println ( linija );
-		System.out.print   ( "| Laikas  |" );		
+		konsoles_lenta.suformuoti();
 		
-		System.out.print ( " |\n" );
-		System.out.println ( "---------------------------------------------------" );
+		System.out.println ( konsoles_lenta.eilute );		
+		System.out.println ( konsoles_lenta.antraste );
+		System.out.println ( konsoles_lenta.eilute );
 		
 		boolean reikia_vazioti = true;
 		double praejes_laikas = 0;
@@ -131,10 +133,10 @@ public class AutoPagrindine {
 				
 				reikia_vazioti = false;
 				
-				if ( automob [ i ].nuvaziotas_atstumas() < atstumas ) {
+				if ( automob [ i ].nuvaziotasAtstumas() < atstumas ) {
 					
 					reikia_vazioti = true;
-					double liko_nuvaziuoti = atstumas - automob [ i ].nuvaziotas_atstumas();
+					double liko_nuvaziuoti = atstumas - automob [ i ].nuvaziotasAtstumas();
 					
 					double laiko_zingsnis_x = laiko_zingsnis;
 					
@@ -153,9 +155,9 @@ public class AutoPagrindine {
 				
 				for (int i = 0; i < k; i++ ) {
 					
-					System.out.print ( String.format( " %10.0f |", automob [ i ].nuvaziotas_atstumas() ) );	
+					System.out.print ( String.format( " %" + konsoles_lenta.ilgiai [ i + 1 ] + ".0f |", automob [ i ].nuvaziotasAtstumas() ) );	
 				}
-				System.out.println ( "\n--------------------------------------------------" );
+				System.out.println ( "\n" + konsoles_lenta.eilute );
 			}
 		}
 	}

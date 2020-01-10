@@ -21,7 +21,10 @@ public class Autobusas extends Auto {
 		this.marsrutas = marsrutas;
 	}
 	
-	
+	public double nuvaziotasAtstumas () {
+		
+		return (this.greitis * laiko_intervalas);
+	}	
 	
 	public String parodyti ( ) {
 		
