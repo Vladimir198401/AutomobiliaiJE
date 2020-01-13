@@ -5,9 +5,7 @@ public class Stotele {
 	public String pav;
 	public double atstumas;
 	public double stovejimo_laikas;
-	
-	public Stotele() {
-	}
+	public double atvykimo_laikas = 0;
 	
 	public Stotele ( String pav, double atstumas, double stovejimo_laikas ) {
 		
@@ -23,6 +21,6 @@ public class Stotele {
 	
 	public String parodyti() {
 		
-		return this.pav + " " + this.atstumas + " " + this.stovejimo_laikas; 
+		return this.pav + " " + this.atstumas + " " + this.stovejimo_laikas + " " + this.atvykimo_laikas; 
 	}
 }

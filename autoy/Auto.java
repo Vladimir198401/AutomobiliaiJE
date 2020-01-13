@@ -46,4 +46,9 @@ public class Auto {
 		
 		return "Automobilis";
 	}
+	
+	public String parodytiPapildomaInfo() {
+		
+		return " tiesiog vaziuoja";
+	}
 }
