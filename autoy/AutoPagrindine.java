@@ -140,14 +140,14 @@ public class AutoPagrindine {
 					
 					for ( int o = 0; o < ( (Autobusas) automob[ r ] ).marsrutas.length; o++ ) {
 						
-						if ( ( (Autobusas) automob[ r ] ).marsrutas[ o ].atvykimo_laikas < ( praejes_laikas + laiko_zingsnis ) ) {
+						if ( ( ( (Autobusas) automob[ r ] ).marsrutas[ o ].atvykimo_laikas < ( praejes_laikas + laiko_zingsnis ) ) 	&& neprideta_reiksme ) {
 							
-							laiko_zingsniai [ i ] = ( (Autobusas) automob[ r ] ).marsrutas[ o ].atvykimo_laikas;
+							laiko_zingsniai [ i ] = ( (Autobusas) automob[ r ] ).marsrutas[ o ].atvykimo_laikas  - praejes_laikas;
 							neprideta_reiksme = false;
 						}
 						if ( ( ( (Autobusas) automob[ r ] ).marsrutas[ o ].isvykimoLaikas() < ( praejes_laikas + laiko_zingsnis ) ) && neprideta_reiksme ) {
 							
-							laiko_zingsniai [ i ] = ( (Autobusas) automob[ r ] ).marsrutas[ o ].atvykimo_laikas;
+							laiko_zingsniai [ i ] = ( (Autobusas) automob[ r ] ).marsrutas[ o ].isvykimoLaikas() - praejes_laikas;
 							neprideta_reiksme = false;							
 						}
 					}
@@ -159,6 +159,7 @@ public class AutoPagrindine {
 			}
 			
 			praejes_laikas += laiko_zingsniai [ i ];
+			System.out.println ( "praejes_laikas += laiko_zingsniai [ " + i + " ]: " + praejes_laikas + "+=" + laiko_zingsniai [ i ] );
 			i++;
 		}
 
@@ -193,7 +194,7 @@ public class AutoPagrindine {
 				pajudejimai++;													
 			}
 			
-			if ( reikia_vazioti ) {  // jai reikia nuvazioti = tiesa arba mielas
+			if ( reikia_vazioti ) {  // jei reikia nuvazioti = tiesa arba mielas
 				
 				System.out.print ( String.format( "| %7.0f |", praejes_laikas) );
 				
