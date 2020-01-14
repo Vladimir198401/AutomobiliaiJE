@@ -5,7 +5,7 @@ public class Stotele {
 	public String pav;
 	public double atstumas;
 	public double stovejimo_laikas;
-	public double atvykimo_laikas = 0;
+	public double atvykimo_laikas;
 	
 	public Stotele ( String pav, double atstumas, double stovejimo_laikas ) {
 		
