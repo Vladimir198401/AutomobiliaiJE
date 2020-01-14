@@ -50,7 +50,7 @@ public class Autobusas extends Auto {
 					
 					double isvykimo_laikas_is_paskutines_pravaziuotos_stoteles 
 						= 
-							marsrutas [ paskutine_pravaziuota_stotele ].atvykimo_laikas 
+							marsrutas [ paskutine_pravaziuota_stotele ].atvykimo_laikas
 						+  
 							marsrutas [ paskutine_pravaziuota_stotele ].stovejimo_laikas
 					;
