@@ -11,6 +11,7 @@ public class AutoPagrindine {
 		Auto[] automob = new Auto[10]; //masivas
 		double atstumas = 1000;   //kintameji
 		double laiko_zingsnis = 10;
+		double[] laiko_zingsniai = new double[100];
 		double maza_paklaida = 0.001;
 		int t = 0;
 		int i = 0;
@@ -123,22 +124,64 @@ public class AutoPagrindine {
 																																			// poto nustatom ribas
 		double praejes_laikas = 0;
 		
-		int pajudejimai = 0;
-		
+		/**
+		 * Generuojam laiko zingsniu masyva
+		 */
+		i = 0;
+		praejes_laikas = 0;
+
+		while ( i < laiko_zingsniai.length ) {
+			
+			boolean neprideta_reiksme = true;
+			
+			for ( int r = 0; r < k; r++ ) {
+				
+				if ( automob[ r ].kasAs().equals ( "Autobusas" ) ) {
+					
+					for ( int o = 0; o < ( (Autobusas) automob[ r ] ).marsrutas.length; o++ ) {
+						
+						if ( ( (Autobusas) automob[ r ] ).marsrutas[ o ].atvykimo_laikas < ( praejes_laikas + laiko_zingsnis ) ) {
+							
+							laiko_zingsniai [ i ] = ( (Autobusas) automob[ r ] ).marsrutas[ o ].atvykimo_laikas;
+							neprideta_reiksme = false;
+						}
+						if ( ( ( (Autobusas) automob[ r ] ).marsrutas[ o ].isvykimoLaikas() < ( praejes_laikas + laiko_zingsnis ) ) && neprideta_reiksme ) {
+							
+							laiko_zingsniai [ i ] = ( (Autobusas) automob[ r ] ).marsrutas[ o ].atvykimo_laikas;
+							neprideta_reiksme = false;							
+						}
+					}
+				}
+			}
+			if ( neprideta_reiksme ) {
+				
+				laiko_zingsniai [ i ] = laiko_zingsnis;
+			}
+			
+			praejes_laikas += laiko_zingsniai [ i ];
+			i++;
+		}
+
+		/**
+		 * Vygdomas vaziavimo simuliavimas
+		 */
+		praejes_laikas = 0;
+		int pajudejimai = 0;																					// apsauga nuo amzino ciklo ir laiko zingsniu skaitiklis
+																							
 		while ( reikia_vazioti && ( pajudejimai < 100 ) ) {  													// kol reikia nuvazioti tiesa kol nepasekia false
 			
-			praejes_laikas += laiko_zingsnis;
-		
+			praejes_laikas += laiko_zingsniai [ pajudejimai ];
+			
 			for ( i = 0; i < k; i++ ) {
 				
 				reikia_vazioti = false; 							//boolean logine reiksme tiesa arba mielas.  true arba false / sio atveju falsse kad sustotu.
 				
-				if ( automob [ i ].nuvaziotasAtstumas() < atstumas ) {
-					
+				if ( automob [ i ].nuvaziotasAtstumas() < atstumas ) {						// tikrinam ar automobilis neprivaziuos pabaigos ( galutines vietos )
+																							// sitame laiko intervale
 					reikia_vazioti = true; 																							//  true nustatoma kad veiktu
 					double liko_nuvaziuoti = atstumas - automob [ i ].nuvaziotasAtstumas();
 					
-					double laiko_zingsnis_x = laiko_zingsnis;
+					double laiko_zingsnis_x = laiko_zingsniai [ pajudejimai ];
 					
 					if ( automob[ i ].greitis * laiko_zingsnis > liko_nuvaziuoti ) {
 						
@@ -147,7 +190,7 @@ public class AutoPagrindine {
 					
 					automob[ i ].judeti( laiko_zingsnis_x );		
 				}
-				pajudejimai++;
+				pajudejimai++;													
 			}
 			
 			if ( reikia_vazioti ) {  // jai reikia nuvazioti = tiesa arba mielas

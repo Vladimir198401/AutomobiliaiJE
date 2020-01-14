@@ -23,4 +23,9 @@ public class Stotele {
 		
 		return this.pav + " " + this.atstumas + " " + this.stovejimo_laikas + " " + this.atvykimo_laikas; 
 	}
+	
+	public double isvykimoLaikas( ) {
+		
+		return atvykimo_laikas + stovejimo_laikas;
+	}
 }
